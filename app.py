@@ -31,16 +31,37 @@ def extract_function_name(function_definition: str) -> str:
 
 @st.cache_data
 def load_data():
-    path = "../programming_runs/root/reflexion_humaneval_py_pass_at_1/reflexion_humaneval_py_pass_at_1.jsonl"
+    path = "reflexion_humaneval_py_pass_at_1.jsonl"
     jsonObj = pd.read_json(path_or_buf=path, lines=True)
     return jsonObj
 
 
 st.title("GPT python function creator")
+usage = """
+## このアプリについて
+このアプリは、GPT-4を使用してPython関数を生成するものです。  
+まず、与えられた関数定義を基に内部テストケースを作成し、生成された関数がテストケースに通過するか判定します。  
+通過しない場合は、GPT-4に反省(reflexion)してもらい,再度関数を生成してもらいます。  
+このプロセスを繰り返し、テストケースに合格する関数を得ます。
+実装する際にReflexionの[論文](https://arxiv.org/abs/2303.11366)とGithubの[コード](https://github.com/noahshinn024/reflexion/tree/main)を参考にしました。
+
+## 使い方
+デモではHumanEvalデータセットを使用しています。  
+プルダウンメニューより関数例を選択できます。  
+「Code Definition」に関数定義が、「Code tests」にテストケースが表示されます。  
+「Submit」ボタンで関数生成が開始され、生成過程が右側に表示されます。  
+最終結果は左欄に表示されます。
+
+自分で関数を定義して生成することも可能です。  
+その場合、「Code Definition」と「Code tests」に関数定義とテストケースを入力してください。  
+「Code tests」には`def check(candidate):`以降のものを定義すれば良いです。
+"""
+
+
 col1, col2 = st.columns(2)
 
 with col1:
-
+    st.write(usage)
     data = load_data()
     # create a selectbox to choose a example from data
     example = st.selectbox(
