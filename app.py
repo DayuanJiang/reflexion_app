@@ -93,7 +93,7 @@ exe = PyExecutor()
 
 
 if submit_button:
-    with st.spinner("Generating internal test cases..."):
+    with col1:
         st.info("Generating internal test cases... Please wait a moment.")
     is_solved = False
     reflections = []
