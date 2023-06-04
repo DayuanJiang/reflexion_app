@@ -106,8 +106,7 @@ if submit_button:
     tests_i = tests_i_result.processed_result
     
     with col2:
-        with st.spinner("Generating test cases..."):
-            st.write("## Generated internal test cases:")
+        st.write("## Generated internal test cases:")
         with st.spinner("Generating test cases..."):
             st.code(tests_i_result.generated_string, language="python")
             # show test cases
