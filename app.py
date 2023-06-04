@@ -104,11 +104,12 @@ if submit_button:
 
     tests_i_result = gen.internal_tests(func_sig=function_definition, max_num_tests=5)
     tests_i = tests_i_result.processed_result
-    st.write("## Generated internal test cases:")
+    
     with col2:
         with st.spinner("Generating test cases..."):
+            st.write("## Generated internal test cases:")
+        with st.spinner("Generating test cases..."):
             st.code(tests_i_result.generated_string, language="python")
-
             # show test cases
             with st.expander("See Generate Details"):
                 st.info("System message: ")
